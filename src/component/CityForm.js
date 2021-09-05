@@ -23,7 +23,7 @@ this.state={
     render() {
         return (
             <div>
-                <Form onSubmit={this.handleSubmit}>
+                <Form className="FormR" onSubmit={this.handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Enter The City: </Form.Label>
                         <Form.Control type="text"  onChange={this.handleLocationNameChange} placeholder="Enter city name" />

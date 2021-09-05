@@ -7,7 +7,7 @@ class CityList extends React.Component {
   render(){
     return(
  <div>
-<Card style={{ width: '18rem' }}>
+<Card className="ListR" style={{ width: '18rem' }}>
   <Card.Img variant="top" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&center=${this.props.locationData.lat},${this.props.locationData.lon}&zoom=18&size=700x700&format=png&maptype=roadmap&markers=icon:<icon>|${this.props.locationData.lat},${this.props.locationData.lon}`}/>
   <Card.Body>
     <Card.Title> The City Name : {this.props.locationData.display_name}</Card.Title>

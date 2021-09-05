@@ -76,12 +76,21 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+This application gave you the location of the city and render The latitude ,The longitude
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+1. must build the repo.
+
+2. after that create the react Applicatin.
+
+3. having the API key.
+
+4. start the work with it.
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+i used the bootstrap and axios library
 
 ## Change Log
 
@@ -92,12 +101,29 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ## Credit and Collaborations
 <!-- Give credit (and a link) to other people or resources that helped you build this application. -->
 
-Name of feature: ________________________________
+Name of feature: Set up your React repository & API keys.
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: half hour
+Start time: 1:30
 
-Start time: _____
+Finish time: 3:40
 
-Finish time: _____
+Actual time needed to complete: 2 hour and 10 min
 
-Actual time needed to complete: _____
+Name of feature: Locations.
+
+Estimate of time needed to complete: 1 hour
+Start time: 3:40
+
+Finish time: 6
+
+Actual time needed to complete: 3 hour
+
+Name of feature: Map.
+
+Estimate of time needed to complete: half hour
+Start time: 6
+
+Finish time: 7:30
+
+Actual time needed to complete: half hour
