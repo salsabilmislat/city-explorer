@@ -26,25 +26,28 @@ class App extends React.Component {
   }
 
   getData = async () => {
+    try {
+      let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.locationName}&format=json`
 
-    let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.locationName}&format=json`
+      let response = await axios.get(url);
+      console.log(response.data[0]);
+      this.setState({
+        locationData: response.data[0],
+        showLocationDetail: true,
+        showErrorMessage: false,
+        errorMessage: ''
+      });
+    }
+    catch (err) {
+      
+      this.setState({
+        showErrorMessage: true,
+        errorMessage: err.message,
+        showLocationDetail: false
 
-    let response = await axios.get(url);
-    console.log(response.data[0]);
-    this.setState({
-      locationData: response.data[0],
-      showLocationDetail: true,
-      showErrorMessage: false,
-      errorMessage: ''
-    });
-  }
-  catch(err) {
-    this.setState({
-      showErrorMessage: false,
-      errorMessage: err.massage,
-      showLocationDetail: true
-
-    });
+      });
+      console.log(this.state.errorMessage);
+    }
   }
 
 
@@ -52,10 +55,11 @@ class App extends React.Component {
     return (
       <div>
         {
-          this.state.showErrorMessage&&
-          <Alert  variant="danger">
-          {this.state.errorMessage}
-        </Alert>
+          this.state.showErrorMessage &&
+
+          <Alert variant="danger">
+            {this.state.errorMessage}
+          </Alert>
         }
         <CityForm getTheCityName={this.getTheCityName} />
         {
