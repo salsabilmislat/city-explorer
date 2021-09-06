@@ -5,6 +5,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class CityList extends React.Component {
 
   render(){
+
+    let newArr=this.props.listOfWeather.map(item=>{
+      return (<p>{item.date} : {item.description} </p>)
+    })
     return(
  <div>
 <Card className="ListR" style={{ width: '18rem' }}>
@@ -17,10 +21,14 @@ class CityList extends React.Component {
     <Card.Text> The longitude:
     {this.props.locationData.lon}
     </Card.Text>
-  
+    <Card.Text> The weather Cast:
+    {newArr}
+    </Card.Text>
   </Card.Body>
 </Card>
+
  </div>
+ 
     );
   }
 }

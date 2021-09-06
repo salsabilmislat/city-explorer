@@ -5,6 +5,7 @@ import axios from 'axios';
 import Alert from 'react-bootstrap/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +14,8 @@ class App extends React.Component {
       locationData: {},
       showLocationDetail: false,
       showErrorMessage: false,
-      errorMessage: ''
+      errorMessage: '',
+      listOfWeather: []
     }
   }
 
@@ -29,15 +31,27 @@ class App extends React.Component {
     try {
       let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.locationName}&format=json`
 
+      let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?city_name=${this.state.locationName}`;
+
+      
+
       let response = await axios.get(url);
+
+      let serverResponse = await axios.get(serverUrl);
+
       console.log(response.data[0]);
+      console.log(serverResponse);
       this.setState({
         locationData: response.data[0],
         showLocationDetail: true,
         showErrorMessage: false,
-        errorMessage: ''
+        errorMessage: '',
+        listOfWeather:serverResponse.data
+      
       });
+      console.log(this.state.listOfWeather);
     }
+    
     catch (err) {
       
       this.setState({
@@ -64,8 +78,9 @@ class App extends React.Component {
         <CityForm getTheCityName={this.getTheCityName} />
         {
           this.state.showLocationDetail &&
-          <CityList locationData={this.state.locationData} />
+          <CityList locationData={this.state.locationData} listOfWeather={this.state.listOfWeather} />
         }
+        
       </div>
     );
   }
