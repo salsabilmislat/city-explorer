@@ -2,12 +2,18 @@ import React from 'react';
 import CityForm from './component/CityForm';
 import CityList from './component/CityList';
 import axios from 'axios';
+import Alert from 'react-bootstrap/Alert'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       locationName: '',
-      locationData: ''
+      locationData: {},
+      showLocationDetail: false,
+      showErrorMessage: false,
+      errorMessage: ''
     }
   }
 
@@ -26,15 +32,36 @@ class App extends React.Component {
     let response = await axios.get(url);
     console.log(response.data[0]);
     this.setState({
-      locationData: response.data[0]
+      locationData: response.data[0],
+      showLocationDetail: true,
+      showErrorMessage: false,
+      errorMessage: ''
     });
-
   }
+  catch(err) {
+    this.setState({
+      showErrorMessage: false,
+      errorMessage: err.massage,
+      showLocationDetail: true
+
+    });
+  }
+
+
   render() {
     return (
       <div>
+        {
+          this.state.showErrorMessage&&
+          <Alert  variant="danger">
+          {this.state.errorMessage}
+        </Alert>
+        }
         <CityForm getTheCityName={this.getTheCityName} />
-        <CityList locationData={this.state.locationData} />
+        {
+          this.state.showLocationDetail &&
+          <CityList locationData={this.state.locationData} />
+        }
       </div>
     );
   }
