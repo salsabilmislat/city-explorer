@@ -26,30 +26,39 @@ class App extends React.Component {
     console.log(this.state.locationName);
     this.getData();
   }
-
+  
   getData = async () => {
     try {
       let url = `https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${this.state.locationName}&format=json`
 
-      let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?city_name=${this.state.locationName}`;
+      
+      let response = await axios.get(url);
+
+     await this.setState({
+        locationData: response.data[0],
+
+      })
+      console.log(this.state.locationData);
+
+      let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?lon=${this.state.locationData.lon}&lat=${this.state.locationData.lat}`;
 
       
-
-      let response = await axios.get(url);
+      
 
       let serverResponse = await axios.get(serverUrl);
 
       console.log(response.data[0]);
       console.log(serverResponse);
-      this.setState({
-        locationData: response.data[0],
+      
+       await this.setState({
+        
         showLocationDetail: true,
         showErrorMessage: false,
         errorMessage: '',
         listOfWeather:serverResponse.data
       
       });
-      console.log(this.state.listOfWeather);
+      console.log(this.state.locationData);
     }
     
     catch (err) {
@@ -60,7 +69,7 @@ class App extends React.Component {
         showLocationDetail: false
 
       });
-      console.log(this.state.errorMessage);
+      // console.log(this.state.errorMessage);
     }
   }
 
