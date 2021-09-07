@@ -9,6 +9,7 @@ class CityList extends React.Component {
     let newArr=this.props.listOfWeather.map(item=>{
       return (<p>{item.date} : {item.description} </p>)
     })
+    console.log(this.props);
     return(
  <div>
 <Card className="ListR" style={{ width: '18rem' }}>
