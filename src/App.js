@@ -4,7 +4,7 @@ import CityList from './component/CityList';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Movies from './component/Movies';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,7 +15,9 @@ class App extends React.Component {
       showLocationDetail: false,
       showErrorMessage: false,
       errorMessage: '',
-      listOfWeather: []
+      listOfWeather: [],
+      listOfMovie:[]
+
     }
   }
 
@@ -42,20 +44,24 @@ class App extends React.Component {
 
       let serverUrl = `${process.env.REACT_APP_SERVER_URL}/weather?lon=${this.state.locationData.lon}&lat=${this.state.locationData.lat}`;
 
-      
+      let serverUrl1=`${process.env.REACT_APP_SERVER_URL}/movies?query=${this.state.locationName}`;
       
 
       let serverResponse = await axios.get(serverUrl);
 
+      let serverResponse1 = await axios.get(serverUrl1);
+
       console.log(response.data[0]);
-      console.log(serverResponse);
+      console.log(serverResponse1);
       
        await this.setState({
         
         showLocationDetail: true,
         showErrorMessage: false,
         errorMessage: '',
-        listOfWeather:serverResponse.data
+        listOfWeather:serverResponse.data,
+        listOfMovie:serverResponse1.data
+      
       
       });
       console.log(this.state.locationData);
@@ -89,6 +95,9 @@ class App extends React.Component {
           this.state.showLocationDetail &&
           <CityList locationData={this.state.locationData} listOfWeather={this.state.listOfWeather} />
         }
+       
+        
+          <Movies listOfMovie={this.state.listOfMovie}/>
         
       </div>
     );
