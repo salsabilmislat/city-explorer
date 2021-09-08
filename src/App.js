@@ -75,7 +75,7 @@ class App extends React.Component {
         showLocationDetail: false
 
       });
-      // console.log(this.state.errorMessage);
+      
     }
   }
 
