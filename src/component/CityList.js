@@ -7,7 +7,7 @@ class CityList extends React.Component {
   render(){
 
     let newArr=this.props.listOfWeather.map(item=>{
-      return (<p>{item.date} : {item.description} </p>)
+      return (<p> Description: high of {item.high_temp}, Low of {item.low_temp}, with {item.description}  Date :{item.date}  </p>)
     })
     console.log(this.props);
     return(
